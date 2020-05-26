@@ -3,11 +3,18 @@
 //
 
 #include "rational.hpp"
+using std::cout;
+using std::endl;
 
 int main() {
     Rational a(1,2), b(2,3), x;
+    cout << "-----------------------------------------" << endl;
     Rational c = a * b; // Kopier-Konstruktor?
-    std::cout  << c << std::endl;
+    cout << "-----------------------------------------" << endl;
+    cout  << c << endl;
+    cout << "-----------------------------------------" << endl;
     x = a * b; //  Zuweisungsoperator?
-    std::cout  << x << std::endl;
+    cout << "-----------------------------------------" << endl;
+    cout  << x << endl;
+    cout << "-----------------------------------------" << endl;
 }
