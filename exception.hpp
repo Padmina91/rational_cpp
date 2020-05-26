@@ -7,6 +7,6 @@
 
 #include <exception>
 
-class DivisionByZeroException : std::exception {};
+class DivisionByZeroException : public std::exception {};
 
 #endif //RATIONAL_CPP_EXCEPTION_HPP

@@ -35,12 +35,8 @@ Rational Rational::sub(Rational x) {
 }
 
 Rational Rational::mul(Rational x) {
+    std::cout << "Anfang Methode mul()" << std::endl;
     return Rational(_numerator * x._numerator , _denominator * x._denominator );
-    //Rational r;
-    //r._numerator = _numerator * x._numerator;
-    //r._denominator = _denominator * x._denominator;
-    //r.cancel();
-    //return r;
 }
 
 Rational Rational::div(Rational x) {
@@ -102,6 +98,7 @@ Rational Rational::operator-(const Rational& x) {
 }
 
 Rational Rational::operator*(const Rational& x) {
+    std::cout << "Anfang Methode operator*" << std::endl;
     return mul(x);
 }
 
