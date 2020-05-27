@@ -13,9 +13,9 @@ class Rational {
 private:
     int _numerator, _denominator;
     
-    Rational add(Rational);
-    Rational sub(Rational);
-    Rational mul(Rational);
+    Rational add(const Rational&) const;
+    Rational sub(const Rational&) const;
+    Rational mul(const Rational&) const;
     Rational div(Rational);
     void inverse();
     void cancel();
@@ -26,15 +26,15 @@ public:
     ~Rational();
     
     Rational& operator=(const Rational&);
-    Rational operator-();
-    Rational operator+(const Rational&);
-    Rational operator-(const Rational&);
-    Rational operator*(const Rational&);
+    Rational operator-() const;
+    Rational operator+(const Rational&) const;
+    Rational operator-(const Rational&) const;
+    Rational operator*(const Rational&) const;
     Rational operator/(const Rational&);
     
-    bool operator<(const Rational&);
-    bool operator>(const Rational&);
-    bool operator==(const Rational&);
+    bool operator<(const Rational&) const;
+    bool operator>(const Rational&) const;
+    bool operator==(const Rational&) const;
 };
 
 #endif //RATIONAL_CPP_RATIONAL_HPP
