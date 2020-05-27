@@ -35,7 +35,7 @@ Rational Rational::sub(const Rational& x) const {
 }
 
 Rational Rational::mul(const Rational& x) const {
-    //std::cout << "Anfang Methode mul()" << std::endl;
+    //std::cout << "Beginning of method mul()" << std::endl;
     Rational r(_numerator * x._numerator , _denominator * x._denominator);
     r.cancel();
     return r;
@@ -65,24 +65,29 @@ Rational::Rational(int z, int n) {
     if (n == 0) {
         throw DivisionByZeroException();
     }
-    std::cout << "Konstruktor wird ausgefuehrt..." << std::endl;
+    std::cout << "Constructor is working..." << std::endl;
     _numerator = z;
     _denominator = n;
 }
 
 Rational::Rational(const Rational& x) {
-    std::cout << "Kopier-Konstruktor wird ausgefuehrt..." << std::endl;
+    std::cout << "Copy constructor is working..." << std::endl;
     _numerator = x._numerator;
     _denominator = x._denominator;
 }
 
+Rational::Rational(const Rational&& x)  noexcept {
+    std::cout << "Move constructor is working..." << std::endl;
+    _numerator = x._numerator;
+    _denominator = x._denominator;
+}
 
 Rational::~Rational() {
-    std::cout << "Destruktor wird ausgefuehrt..." << std::endl;
+    std::cout << "Destructor is working..." << std::endl;
 }
 
 Rational& Rational::operator=(const Rational& orig) {
-    std::cout << "Zuweisungsopeator wird ausgefuehrt..." << std::endl;
+    std::cout << "Assignment operator is working..." << std::endl;
     _numerator = orig._numerator;
     _denominator = orig._denominator;
     return *this;

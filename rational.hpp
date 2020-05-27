@@ -23,6 +23,7 @@ private:
 public:
     explicit Rational(int z = 1, int n = 1);
     Rational(const Rational&);
+    Rational(const Rational&&) noexcept;
     ~Rational();
     
     Rational& operator=(const Rational&);
