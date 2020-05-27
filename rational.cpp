@@ -76,6 +76,7 @@ Rational::Rational(const Rational& x) {
     _denominator = x._denominator;
 }
 
+
 Rational::~Rational() {
     std::cout << "Destruktor wird ausgefuehrt..." << std::endl;
 }
