@@ -8,7 +8,7 @@ using std::endl;
 
 int main() {
     
-    std::to_string(5);
+    //std::to_string(5);
     Rational a(1,2), b(2,3), x;
     cout << "-----------------------------------------" << endl;
     Rational c = a * b; // copy-constructor? naaahhh. move-constructor? naaaaah.

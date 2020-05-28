@@ -10,7 +10,7 @@
 class Rational {
     friend std::ostream& operator<<(std::ostream&, const Rational&);
     
-private:
+protected:
     int _numerator, _denominator;
     
     Rational add(const Rational&) const;
@@ -22,9 +22,9 @@ private:
 
 public:
     explicit Rational(int z = 1, int n = 1);
-    Rational(const Rational&);
-    Rational(const Rational&&) noexcept;
-    ~Rational();
+    Rational(const Rational&); // copy constructor
+    Rational(const Rational&&) noexcept; // move constructor
+    virtual ~Rational(); // destructor
     
     Rational& operator=(const Rational&);
     Rational operator-() const;
