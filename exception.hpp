@@ -9,4 +9,6 @@
 
 class DivisionByZeroException : public std::exception {};
 
+class NotANumberException : public std::exception {};
+
 #endif //RATIONAL_CPP_EXCEPTION_HPP

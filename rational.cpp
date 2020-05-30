@@ -4,6 +4,7 @@
 
 #include "rational.hpp"
 #include "exception.hpp"
+#include <iostream>
 
 // ----------------------------------------- global functions -----------------------------------------
 
@@ -61,29 +62,23 @@ void Rational::cancel() {
     _denominator /= div;
 }
 
-Rational::Rational(int z, int n) {
+Rational::Rational(int z, int n) : _numerator(z), _denominator(n) {
     if (n == 0) {
         throw DivisionByZeroException();
     }
-    std::cout << "Constructor is working..." << std::endl;
-    _numerator = z;
-    _denominator = n;
+    std::cout << "Constructor of Rational is working..." << std::endl;
 }
 
-Rational::Rational(const Rational& x) {
-    std::cout << "Copy constructor is working..." << std::endl;
-    _numerator = x._numerator;
-    _denominator = x._denominator;
+Rational::Rational(const Rational& x) : _numerator(x._numerator), _denominator(x._denominator) {
+    std::cout << "Copy constructor of Rational is working..." << std::endl;
 }
 
-Rational::Rational(const Rational&& x)  noexcept {
-    std::cout << "Move constructor is working..." << std::endl;
-    _numerator = x._numerator;
-    _denominator = x._denominator;
+Rational::Rational(Rational&& x) noexcept : _numerator(x._numerator), _denominator(x._denominator) {
+    std::cout << "Move constructor of Rational is working..." << std::endl;
 }
 
 Rational::~Rational() {
-    std::cout << "Destructor is working..." << std::endl;
+    std::cout << "Destructor of Rational is working..." << std::endl;
 }
 
 Rational& Rational::operator=(const Rational& orig) {
@@ -127,4 +122,13 @@ bool Rational::operator==(const Rational& x) const {
     double b = static_cast<double>(x._numerator)/ static_cast<double>(x._denominator);
     bool equality = a - 0.0000001 < b && a + 0.0000001 > b;
     return equality;
+}
+
+double Rational::double_value() {
+    double val = static_cast<double>(_numerator) / static_cast<double>(_denominator);
+    return val;
+}
+
+std::string Rational::to_string() {
+    return nf->format(this);
 }
