@@ -62,18 +62,18 @@ void Rational::cancel() {
     _denominator /= div;
 }
 
-Rational::Rational(int z, int n) : _numerator(z), _denominator(n) {
+Rational::Rational(int z, int n, NumberFormat* nf) : _numerator(z), _denominator(n), _nf(nf) {
     if (n == 0) {
         throw DivisionByZeroException();
     }
-    std::cout << "Constructor of Rational is working..." << std::endl;
+    std::cout << "Constructor of Rational with nf is working..." << std::endl;
 }
 
-Rational::Rational(const Rational& x) : _numerator(x._numerator), _denominator(x._denominator) {
+Rational::Rational(const Rational& x) : _numerator(x._numerator), _denominator(x._denominator), _nf(x._nf) {
     std::cout << "Copy constructor of Rational is working..." << std::endl;
 }
 
-Rational::Rational(Rational&& x) noexcept : _numerator(x._numerator), _denominator(x._denominator) {
+Rational::Rational(Rational&& x) noexcept : _numerator(x._numerator), _denominator(x._denominator), _nf(x._nf) {
     std::cout << "Move constructor of Rational is working..." << std::endl;
 }
 
@@ -82,9 +82,13 @@ Rational::~Rational() {
 }
 
 Rational& Rational::operator=(const Rational& orig) {
-    std::cout << "Assignment operator is working..." << std::endl;
-    _numerator = orig._numerator;
-    _denominator = orig._denominator;
+    if (&orig != this) {
+        std::cout << "Assignment operator is working..." << std::endl;
+        _numerator = orig._numerator;
+        _denominator = orig._denominator;
+        return *this;
+    }
+    std::cout << "Assignment operator aborted!" << std::endl;
     return *this;
 }
 
@@ -130,5 +134,5 @@ double Rational::double_value() {
 }
 
 std::string Rational::to_string() {
-    return nf->format(this);
+    return _nf->format(this);
 }

@@ -8,6 +8,8 @@
 #include <string>
 #include "rational.hpp"
 
+class Rational;
+
 class NumberFormat {
 protected:
     enum class Format {
@@ -16,11 +18,15 @@ protected:
     
     Format _format;
     
+    
+    static std::string format_help(Rational* x);
+    static Rational parse_help(std::string val_string);
+    
 public:
     NumberFormat(Format format);
     
     std::string format(Rational* x);
-    
+    Rational parse(std::string val_string);
 };
 
 

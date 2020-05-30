@@ -11,8 +11,13 @@ NumberFormat::NumberFormat(Format format) : _format(format) {
 }
 
 
+std::string NumberFormat::format(Rational *x) {
+    return ""; //TODO: implement Function!
+}
 
-
+Rational NumberFormat::parse(std::string val_string) {
+    return Rational(1, 2); //TODO: implement Function!
+}
 
 
 

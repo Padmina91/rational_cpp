@@ -7,12 +7,14 @@
 
 #include "numberFormat.hpp"
 
+class NumberFormat;
+
 class Rational {
     friend std::ostream& operator<<(std::ostream&, const Rational&);
     
 protected:
     int _numerator, _denominator;
-    NumberFormat* nf; //TODO: initialisieren!
+    NumberFormat* _nf; //TODO: initialisieren!
     
     Rational add(const Rational&) const;
     Rational sub(const Rational&) const;
@@ -22,7 +24,7 @@ protected:
     void cancel();
 
 public:
-    explicit Rational(int z = 1, int n = 1);
+    Rational(int z = 1, int n = 1, NumberFormat* nf = nullptr);
     Rational(const Rational&); // copy constructor
     Rational(Rational&&) noexcept; // move constructor
     virtual ~Rational(); // destructor
