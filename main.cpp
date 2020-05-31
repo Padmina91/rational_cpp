@@ -9,13 +9,13 @@ using std::endl;
 
 int main() {
     
-    NumberFormatEN en;
+    NumberFormatDE de;
     
-    Rational r = en.parse("125,458,148.48");
+    //Rational r = de.parse("125,458,148.48");
     
-    cout << r << endl;
+    //cout << r << endl;
 
+    Rational asdf(400000000, 1, &de);
     
-    
-    
+    cout << asdf.to_string() << endl;
 }

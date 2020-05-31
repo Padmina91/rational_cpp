@@ -72,10 +72,10 @@ void NumberFormat::add_thoudands_sep(std::string& str, Format format) {
     char decimal_sep = format == Format::german ? ',' : '.';
     size_t pos_of_decimal_sep = str.find_first_of(decimal_sep);
     pos_of_decimal_sep = pos_of_decimal_sep == std::string::npos ? str.length() : pos_of_decimal_sep;
-    size_t pos_of_thoudand_sep = pos_of_decimal_sep - 4;
-    while (pos_of_thoudand_sep > str.length()) {
+    size_t pos_of_thoudand_sep = pos_of_decimal_sep - 3;
+    while (pos_of_thoudand_sep < str.length() && pos_of_thoudand_sep != 0) {
         str.insert(pos_of_thoudand_sep, thousand_sep);
-        pos_of_thoudand_sep -= 4;
+        pos_of_thoudand_sep -= 3;
     }
 }
 
