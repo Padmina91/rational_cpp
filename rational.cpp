@@ -8,8 +8,8 @@
 
 // ----------------------------------------- global functions -----------------------------------------
 
-int gcd(int a, int b) { // gcd = greatest common divisor (groesster gemeinsamer Teiler)
-    int r = a % b;
+long long int gcd(long long int a, long long int b) { // gcd = greatest common divisor (groesster gemeinsamer Teiler)
+    long long int r = a % b;
     while (r != 0) {
         a = b;
         b = r;
@@ -51,34 +51,39 @@ void Rational::inverse() {
     if (_numerator == 0) {
         throw DivisionByZeroException();
     }
-    int t = _numerator;
+    long long int t = _numerator;
     _numerator = _denominator;
     _denominator = t;
 }
 
 void Rational::cancel() {
-    int div = gcd(_numerator, _denominator);
+    long long int div = gcd(_numerator, _denominator);
     _numerator /= div;
     _denominator /= div;
 }
 
-Rational::Rational(int z, int n, NumberFormat* nf) : _numerator(z), _denominator(n), _nf(nf) {
+Rational::Rational(long long int z, long long int n, NumberFormat* nf) : _numerator(z), _denominator(n), _nf(nf) {
     if (n == 0) {
         throw DivisionByZeroException();
     }
-    std::cout << "Constructor of Rational with nf is working..." << std::endl;
+    this->cancel();
+    std::cout << "Constructor of Rational is working..." << std::endl;
 }
 
 Rational::Rational(const Rational& x) : _numerator(x._numerator), _denominator(x._denominator), _nf(x._nf) {
     std::cout << "Copy constructor of Rational is working..." << std::endl;
 }
 
-Rational::Rational(Rational&& x) noexcept : _numerator(x._numerator), _denominator(x._denominator), _nf(x._nf) {
-    std::cout << "Move constructor of Rational is working..." << std::endl;
-}
-
 Rational::~Rational() {
     std::cout << "Destructor of Rational is working..." << std::endl;
+}
+
+long long int Rational::get_numerator() const {
+    return _numerator;
+}
+
+long long int Rational::get_denominator() const {
+    return _denominator;
 }
 
 Rational& Rational::operator=(const Rational& orig) {
@@ -128,11 +133,11 @@ bool Rational::operator==(const Rational& x) const {
     return equality;
 }
 
-double Rational::double_value() {
+double Rational::double_value() const {
     double val = static_cast<double>(_numerator) / static_cast<double>(_denominator);
     return val;
 }
 
 std::string Rational::to_string() {
-    return _nf->format(this);
+    return _nf->format(*this);
 }

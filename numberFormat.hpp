@@ -13,32 +13,47 @@ class Rational;
 class NumberFormat {
 protected:
     enum class Format {
-        european, english
+        german, english
     };
     
     Format _format;
     
-    
-    static std::string format_help(Rational* x);
-    static Rational parse_help(std::string val_string);
+    static bool check_string_correctness(const std::string& str, Format format);
+    static void remove_all(std::string& str, char to_remove);
+    static void replace_character(std::string& str, char to_remove, std::string&& to_put_instead);
+    static void add_thoudands_sep(std::string& str, Format format);
+    static std::string format_help(const Rational& x, Format format);
+    static Rational parse_help(std::string& val_string, Format format);
     
 public:
     NumberFormat(Format format);
+    virtual ~NumberFormat() noexcept;
     
-    std::string format(Rational* x);
-    Rational parse(std::string val_string);
+    virtual std::string format(const Rational& x) const = 0;
+    virtual Rational parse(std::string&& val_string) = 0;
+    virtual Rational parse(std::string& val_string) = 0;
 };
 
 
 class NumberFormatDE : public NumberFormat {
 public:
     NumberFormatDE();
+    virtual ~NumberFormatDE() noexcept;
+    
+    virtual std::string format(const Rational& x) const override;
+    virtual Rational parse(std::string&& val_string) override;
+    virtual Rational parse(std::string& val_string) override;
 };
 
 
 class NumberFormatEN : public NumberFormat {
 public:
     NumberFormatEN();
+    virtual ~NumberFormatEN() noexcept;
+    
+    virtual std::string format(const Rational& x) const override;
+    virtual Rational parse(std::string&& val_string) override;
+    virtual Rational parse(std::string& val_string) override;
 };
 
 

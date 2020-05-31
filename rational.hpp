@@ -13,8 +13,8 @@ class Rational {
     friend std::ostream& operator<<(std::ostream&, const Rational&);
     
 protected:
-    int _numerator, _denominator;
-    NumberFormat* _nf; //TODO: initialisieren!
+    long long int _numerator, _denominator;
+    NumberFormat* _nf;
     
     Rational add(const Rational&) const;
     Rational sub(const Rational&) const;
@@ -24,10 +24,12 @@ protected:
     void cancel();
 
 public:
-    Rational(int z = 1, int n = 1, NumberFormat* nf = nullptr);
+    Rational(long long int z = 1, long long int n = 1, NumberFormat* nf = nullptr);
     Rational(const Rational&); // copy constructor
-    Rational(Rational&&) noexcept; // move constructor
     virtual ~Rational(); // destructor
+    
+    long long int get_numerator() const;
+    long long int get_denominator() const;
     
     Rational& operator=(const Rational&);
     Rational operator-() const;
@@ -40,7 +42,7 @@ public:
     bool operator>(const Rational&) const;
     bool operator==(const Rational&) const;
     
-    double double_value();
+    double double_value() const;
     std::string to_string();
 };
 

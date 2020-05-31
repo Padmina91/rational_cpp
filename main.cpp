@@ -9,15 +9,13 @@ using std::endl;
 
 int main() {
     
-    //std::to_string(5);
-    Rational a(1,2), b(2,3), x;
-    cout << "-----------------------------------------" << endl;
-    Rational c = a * b; // copy-constructor? naaahhh. move-constructor? naaaaah.
-    cout << "-----------------------------------------" << endl;
-    cout  << c << endl;
-    cout << "-----------------------------------------" << endl;
-    x = a * b; // assignment-operator? yup.
-    cout << "-----------------------------------------" << endl;
-    cout  << x << endl;
-    cout << "-----------------------------------------" << endl;
+    NumberFormatEN en;
+    
+    Rational r = en.parse("125,458,148.48");
+    
+    cout << r << endl;
+
+    
+    
+    
 }
