@@ -6,6 +6,8 @@
 #include "exception.hpp"
 #include <iostream>
 
+#define DEBUG false
+
 // ----------------------------------------- global functions -----------------------------------------
 
 /**
@@ -63,7 +65,9 @@ Rational Rational::sub(const Rational& x) const {
  * @return result (Rational)
  */
 Rational Rational::mul(const Rational& x) const {
-    //std::cout << "Beginning of method mul()" << std::endl;
+#if DEBUG
+    std::cout << "Beginning of method mul()" << std::endl;
+#endif
     Rational r(_numerator * x._numerator, _denominator * x._denominator);
     r.cancel();
     return r;
@@ -81,6 +85,7 @@ Rational Rational::div(Rational x) {
 
 /**
  * Inverts the Rational object.
+ * @throws DivisionByZeroException
  */
 void Rational::inverse() {
     if (_numerator == 0) {
@@ -105,13 +110,16 @@ void Rational::cancel() {
  * @param z (long long int) default: 1
  * @param n (long long int) default: 1
  * @param nf (NumberFormat*) default: nullptr
+ * @throws DivisionByZeroException
  */
 Rational::Rational(long long int z, long long int n, NumberFormat *nf) : _numerator(z), _denominator(n), _nf(nf) {
     if (n == 0) {
         throw DivisionByZeroException();
     }
     this->cancel();
+#if DEBUG
     std::cout << "Constructor of Rational is working..." << std::endl;
+#endif
 }
 
 /**
@@ -119,30 +127,18 @@ Rational::Rational(long long int z, long long int n, NumberFormat *nf) : _numera
  * @param x (Rational&)
  */
 Rational::Rational(const Rational& x) : _numerator(x._numerator), _denominator(x._denominator), _nf(x._nf) {
+#if DEBUG
     std::cout << "Copy constructor of Rational is working..." << std::endl;
+#endif
 }
 
 /**
  * Destructor of Rational.
  */
 Rational::~Rational() {
+#if DEBUG
     std::cout << "Destructor of Rational is working..." << std::endl;
-}
-
-/**
- * Getter-method for _numerator.
- * @return _numerator (long long int)
- */
-long long int Rational::get_numerator() const {
-    return _numerator;
-}
-
-/**
- * Getter-method for _denominator.
- * @return _denominator (long long int)
- */
-long long int Rational::get_denominator() const {
-    return _denominator;
+#endif
 }
 
 /**
@@ -152,12 +148,16 @@ long long int Rational::get_denominator() const {
  */
 Rational& Rational::operator=(const Rational& orig) {
     if (&orig != this) {
+#if DEBUG
         std::cout << "Assignment operator is working..." << std::endl;
+#endif
         _numerator = orig._numerator;
         _denominator = orig._denominator;
         return *this;
     }
+#if DEBUG
     std::cout << "Assignment operator aborted!" << std::endl;
+#endif
     return *this;
 }
 
@@ -193,7 +193,9 @@ Rational Rational::operator-(const Rational& x) const {
  * @return result (Rational)
  */
 Rational Rational::operator*(const Rational& x) const {
-    //std::cout << "Anfang Methode operator*" << std::endl;
+#if DEBUG
+    std::cout << "Anfang Methode operator*" << std::endl;
+#endif
     return mul(x);
 }
 

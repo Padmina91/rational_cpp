@@ -28,9 +28,6 @@ public:
     Rational(const Rational&); // copy constructor
     virtual ~Rational(); // destructor
     
-    long long int get_numerator() const;
-    long long int get_denominator() const;
-    
     Rational& operator=(const Rational&);
     Rational operator-() const;
     Rational operator+(const Rational&) const;

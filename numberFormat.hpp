@@ -11,23 +11,31 @@
 class Rational;
 
 class NumberFormat {
+public:
+    enum class Format;
 protected:
-    enum class Format {
-        german, english
-    };
-    
-    Format _format;
+    NumberFormat::Format _format;
     
     static bool check_string_correctness(const std::string& str, Format format);
     static void remove_all(std::string& str, char to_remove);
     static void replace_character(std::string& str, char to_remove, std::string&& to_put_instead);
     static void add_thoudands_sep(std::string& str, Format format);
+    static void remove_unnecessary_zeros(std::string& str, char decimal_sep);
     static std::string format_help(const Rational& x, Format format);
-    static Rational parse_help(std::string& val_string, Format format);
+    static Rational parse_help(std::string& val_string, NumberFormat& nf);
     
 public:
+    enum class Format {
+        german, english
+    };
+    
+    static int num_of_NumberFormat_objects_alive;
+    
     NumberFormat(Format format);
+    NumberFormat(NumberFormat& orig);
     virtual ~NumberFormat() noexcept;
+    
+    Format get_format();
     
     virtual std::string format(const Rational& x) const = 0;
     virtual Rational parse(std::string&& val_string) = 0;
@@ -37,7 +45,10 @@ public:
 
 class NumberFormatDE : public NumberFormat {
 public:
+    static int num_of_NumberFormatDE_objects_alive;
+    
     NumberFormatDE();
+    NumberFormatDE(NumberFormatDE& orig);
     virtual ~NumberFormatDE() noexcept;
     
     virtual std::string format(const Rational& x) const override;
@@ -48,7 +59,10 @@ public:
 
 class NumberFormatEN : public NumberFormat {
 public:
+    static int num_of_NumberFormatEN_objects_alive;
+    
     NumberFormatEN();
+    NumberFormatEN(NumberFormatEN& orig);
     virtual ~NumberFormatEN() noexcept;
     
     virtual std::string format(const Rational& x) const override;
