@@ -5,8 +5,12 @@
 #include "numberFormat.hpp"
 #include "exception.hpp"
 #include <cmath>
-#include <iostream>
+
 #define DEBUG false
+
+#if DEBUG
+#include <iostream>
+#endif
 
 /**
  * Only for debugging and testing: Keeps track of the number of NumberFormat objects alive.
@@ -256,7 +260,7 @@ NumberFormatDE::~NumberFormatDE() noexcept {
  * @return return_string (std::string)
  */
 std::string NumberFormatDE::format(const Rational& x) const {
-    return NumberFormat::format_help(x, Format::german);
+    return format_help(x, Format::german);
 }
 
 /**
@@ -275,7 +279,7 @@ Rational NumberFormatDE::parse(std::string&& val_string) {
  * @return r (Rational)
  */
 Rational NumberFormatDE::parse(std::string& val_string) {
-    return NumberFormat::parse_help(val_string, *this);
+    return parse_help(val_string, *this);
 }
 
 /**
@@ -315,7 +319,7 @@ NumberFormatEN::~NumberFormatEN() noexcept {
  * @return return_string (std::string)
  */
 std::string NumberFormatEN::format(const Rational& x) const {
-    return NumberFormat::format_help(x, Format::english);
+    return format_help(x, Format::english);
 }
 
 /**
@@ -334,5 +338,5 @@ Rational NumberFormatEN::parse(std::string&& val_string) {
  * @return r (Rational)
  */
 Rational NumberFormatEN::parse(std::string& val_string) {
-    return NumberFormat::parse_help(val_string, *this);
+    return parse_help(val_string, *this);
 }
